@@ -2,43 +2,42 @@ import { useTransactions } from "../../hooks/useTransactions";
 import { Container } from "./styles";
 
 export function TransactionsTable() {
-  const {transactions} = useTransactions()
-  
+  const { transactions } = useTransactions();
 
-  return(
+  return (
     <Container>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Value</th>
-              <th>Category</th>
-              <th>Date</th>
-            </tr>
-          </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Value</th>
+            <th>Category</th>
+            <th>Date</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            {transactions.map(transaction => {
-              return(
+        <tbody>
+          {transactions.map((transaction) => {
+            return (
               <tr key={transaction.id}>
                 <td>{transaction.title}</td>
                 <td className={transaction.type}>
-                  {new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD'
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
                   }).format(transaction.amount)}
-                  </td>
+                </td>
                 <td>{transaction.category}</td>
                 <td>
-                {new Intl.DateTimeFormat('en-US').format(
-                  new Date(transaction.createdAt) //transaction.cratedAt era uma string.
-                )}
+                  {new Intl.DateTimeFormat("en-US").format(
+                    new Date(transaction.createdAt) //transaction.cratedAt era uma string.
+                  )}
                 </td>
               </tr>
-              )
-            })}
-          </tbody>
-        </table>
+            );
+          })}
+        </tbody>
+      </table>
     </Container>
-  )
+  );
 }
